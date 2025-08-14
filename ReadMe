@@ -1,18 +1,18 @@
 # 🚀 Pismo Transaction Service
 
-A Spring Boot application for managing **Accounts** and **Transactions** with PostgreSQL, following clean architecture and REST API standards.
+A Spring Boot application for managing Accounts and Transactions with PostgreSQL, following clean architecture and REST API standards.
 
 
 ---
 
 ## 📚 Tech Stack
 
-- **Java 23**
-- **Spring Boot 3.5.4**
-- **Spring Data JPA**
-- **PostgreSQL 16**
-- **Docker & Docker Compose**
-- **Swagger UI (springdoc-openapi)**
+- Java 23
+- Spring Boot 3.5.4
+- Spring Data JPA
+- PostgreSQL 16
+- Docker & Docker Compose
+- Swagger UI (springdoc-openapi)
 
 ---
 
@@ -91,22 +91,19 @@ json
 🛠 Run Locally
 bash
 # 1. Clone repo
-git clone https://github.com/yourusername/pismo-service.git
-cd pismo-service
+git clone https://github.com/nikhil699/Pismo_Capstone_Project.git
 
 # 2. Build
 mvn clean install
 
 # 3. Run
-mvn spring-boot:run
+mvn spring-boot: run
 
 
 
 
 Swagger UI:
-
-bash
-http://localhost:9090/swagger-ui/index.html
+http://localhost:9090/swagger-ui/index.html#/
 
 
 
@@ -129,10 +126,13 @@ psql -U postgres -d pismo_db
 \dt
 
 -- Check Accounts
-SELECT * FROM accounts;
+SELECT * FROM Accounts;
 
 -- Check Transactions
-SELECT * FROM transactions;
+SELECT * FROM Transactions;
+
+-- Check Document
+SELECT * FROM OperationsTypes;
 
 
 
