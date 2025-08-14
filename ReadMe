@@ -87,16 +87,18 @@ json
 }
 
 
-## Databse
-![Transaction Database](
-images/TransactionDataBase.png)
-
-![Accounts Database](
-images/AccountsDataBase.png)
 
 
-![Operation Database](
-images/OperationDataBase.png)
+## Database
+
+![Transaction Database](images/TransactionDataBase.png)
+
+![Accounts Database](images/AccountsDataBase.png)
+
+![Operation Database](images/OperationDataBase.png)
+
+
+
 
 🛠 Run Locally
 bash
