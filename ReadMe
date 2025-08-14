@@ -132,7 +132,7 @@ PostgreSQL on: localhost:5432
 🗄 Database Setup
 sql
 -- Connect to DB
-psql -U postgres -d pismo_db
+ docker exec -it postgres-db psql -U postgres -d pismo_db
 
 -- View Tables
 \dt
