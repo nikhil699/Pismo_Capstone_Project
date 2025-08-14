@@ -51,6 +51,7 @@ json
   "documentNumber": "12345678900"
 }
 
+
 ### 2️⃣ Fetch Account by ID
 json
 
@@ -86,7 +87,16 @@ json
 }
 
 
+## Databse
+![Transaction Database](
+images/TransactionDataBase.png)
 
+![Accounts Database](
+images/AccountsDataBase.png)
+
+
+![Operation Database](
+images/OperationDataBase.png)
 
 🛠 Run Locally
 bash
@@ -110,7 +120,7 @@ http://localhost:9090/swagger-ui/index.html#/
 🐳 Run with Docker
 bash
 docker-compose up --build
-App runs on: http://localhost:9090
+App runs on: http://localhost:8080
 
 
 
@@ -126,13 +136,13 @@ psql -U postgres -d pismo_db
 \dt
 
 -- Check Accounts
-SELECT * FROM Accounts;
+SELECT * FROM accounts;
 
 -- Check Transactions
-SELECT * FROM Transactions;
+SELECT * FROM transactions;
 
 -- Check Document
-SELECT * FROM OperationsTypes;
+SELECT * FROM operationstypes;
 
 
 
