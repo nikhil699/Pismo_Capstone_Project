@@ -11,11 +11,13 @@ import Pismo.demo.repository.AccountRepository;
 import Pismo.demo.repository.OperationTypeRepository;
 import Pismo.demo.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class TransactionService {
@@ -25,29 +27,48 @@ public class TransactionService {
     private final OperationTypeRepository operationTypeRepository;
 
     public Optional<TransactionResponse> createTransaction(TransactionRequest request) {
-        // Fetch account or throw exception
+        log.info("Creating transaction: {}", request);
+
+        // 1. Fetch account
         Account account = accountRepository.findById(request.getAccountId())
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+                .orElseThrow(() -> {
+                    log.error("Account not found with ID: {}", request.getAccountId());
+                    return new ResourceNotFoundException("Account not found with ID: " + request.getAccountId());
+                });
 
-        // Fetch operation type or throw exception
-        OperationType operationType = operationTypeRepository.findById(request.getOperationTypeId())
-                .orElseThrow(() -> new ResourceNotFoundException("Operation type not found"));
+        // 2. Fetch operation type
+        OperationType operationType = operationTypeRepository.findById(request.getOperationType_id())
+                .orElseThrow(() -> {
+                    log.error("Operation type not found with ID: {}", request.getOperationType_id());
+                    return new ResourceNotFoundException("Operation type not found with ID: " + request.getOperationType_id());
+                });
 
-        // Apply business rules
-        BigDecimal amount = request.getAmount();
-        if (isNegativeOperation(operationType.getOperationTypeId())) {
-            amount = amount.negate();
-        } else if (isPositiveOperation(operationType.getOperationTypeId())) {
-            amount = amount.abs();
-        }
+        // 3. Apply business rules for amount
+        BigDecimal adjustedAmount = adjustAmountByOperationType(request.getAmount(), operationType.getOperationTypeId());
+        request.setAmount(adjustedAmount);
 
-        request.setAmount(amount);
+        log.debug("Adjusted amount for operation type {}: {}", operationType.getDescription(), adjustedAmount);
 
-        // Save transaction
+        // 4. Save transaction
         Transaction transaction = EntityMapper.toTransaction(account, operationType, request);
-        Transaction saved = transactionRepository.save(transaction);
+        Transaction savedTransaction = transactionRepository.save(transaction);
 
-        return Optional.of(EntityMapper.toTransactionResponse(saved));
+        log.info("Transaction created successfully: ID {}", savedTransaction.getTransactionId());
+
+        return Optional.of(EntityMapper.toTransactionResponse(savedTransaction));
+    }
+
+    /**
+     * Adjusts the transaction amount based on operation type rules
+     */
+    private BigDecimal adjustAmountByOperationType(BigDecimal amount, Long operationTypeId) {
+        if (isNegativeOperation(operationTypeId)) {
+            return amount.abs().negate(); // Make it negative
+        }
+        if (isPositiveOperation(operationTypeId)) {
+            return amount.abs(); // Ensure positive
+        }
+        return amount; // Default (if no rule matched)
     }
 
     private boolean isNegativeOperation(Long operationTypeId) {

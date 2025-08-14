@@ -17,7 +17,7 @@ public class TransactionRequest {
 
     @Schema(description = "Operation type ID", example = "4")
     @NotNull(message = "Operation type ID is required")
-    private Long operationTypeId;
+    private Long operationType_id;
 
     @Schema(description = "Transaction amount", example = "123.45")
     @DecimalMin(value = "0.01", message = "Amount must be greater than zero")

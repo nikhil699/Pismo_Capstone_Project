@@ -55,7 +55,7 @@ class TransactionServiceTest {
 
         TransactionRequest request = TransactionRequest.builder()
                 .accountId(1L)
-                .operationTypeId(4L)
+                .operationType_id(4L)
                 .amount(new BigDecimal("200.00"))
                 .build();
 

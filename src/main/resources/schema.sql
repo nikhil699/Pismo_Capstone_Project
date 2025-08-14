@@ -1,17 +1,17 @@
-CREATE TABLE IF NOT EXISTS Accounts (
-    Account_id SERIAL PRIMARY KEY,
-    Document_Number VARCHAR(20) UNIQUE NOT NULL
+CREATE TABLE IF NOT EXISTS accounts (
+    account_id SERIAL PRIMARY KEY,
+    document_number VARCHAR(20) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS OperationsTypes (
-    OperationType_ID SERIAL PRIMARY KEY,
-    Description VARCHAR(50) UNIQUE NOT NULL
+CREATE TABLE IF NOT EXISTS operation_types (
+    operation_type_id SERIAL PRIMARY KEY,
+    description VARCHAR(50) UNIQUE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Transactions (
-    Transaction_Id SERIAL PRIMARY KEY,
-    Account_Id BIGINT NOT NULL REFERENCES accounts(account_id),
-    OperationType_ID BIGINT NOT NULL REFERENCES operation_types(operation_type_id),
-    Amount NUMERIC(15,2) NOT NULL,
-    EventDate TIMESTAMP NOT NULL
+CREATE TABLE IF NOT EXISTS transactions (
+    transaction_id SERIAL PRIMARY KEY,
+    account_id BIGINT NOT NULL REFERENCES accounts(account_id),
+    operation_type_id BIGINT NOT NULL REFERENCES operation_types(operation_type_id),
+    amount NUMERIC(15,2) NOT NULL,
+    event_date TIMESTAMP NOT NULL
 );

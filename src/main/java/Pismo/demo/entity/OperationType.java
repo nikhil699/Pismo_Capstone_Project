@@ -3,16 +3,16 @@ package Pismo.demo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 @Entity
-@Table(name = "OperationsTypes")
+@Table(name = "operation_types")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class OperationType {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "OperationType_ID")
+    @Column(name = "operation_type_id")
     private Long operationTypeId;
 
-    @Column(name = "Description",nullable = false, unique = true)
+    @Column(name = "description", nullable = false, unique = true)
     private String description;
 }

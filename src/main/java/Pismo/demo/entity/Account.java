@@ -4,16 +4,16 @@ import jakarta.persistence.*;
 import lombok.*;
 import jakarta.persistence.Entity;
 
+
 @Entity
-@Table(name = "Accounts")
+@Table(name = "accounts")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Account {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Account_id")
+    @Column(name = "account_id")
     private Long accountId;
 
-    @Column(name = "Document_Number", nullable = false, unique = true)
+    @Column(name = "document_number", nullable = false, unique = true)
     private String documentNumber;
 }

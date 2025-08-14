@@ -6,27 +6,27 @@ import lombok.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+
 @Entity
-@Table(name = "Transactions")
+@Table(name = "transactions")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Transaction_Id")
+    @Column(name = "transaction_id")
     private Long transactionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Account_Id", nullable = false)
+    @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "OperationType_ID", nullable = false)
+    @JoinColumn(name = "operation_type_id", nullable = false)
     private OperationType operationType;
 
-    @Column(name = "Amount", nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "EventDate", nullable = false)
+    @Column(name = "event_date", nullable = false)
     private LocalDateTime eventDate;
 }
