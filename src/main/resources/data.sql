@@ -1,0 +1,5 @@
+-- Insert initial operation types
+INSERT INTO OperationsTypes(Description) VALUES ('CASH PURCHASE') ON CONFLICT DO NOTHING;;
+INSERT INTO OperationsTypes(Description) VALUES ('INSTALLMENT PURCHASE') ON CONFLICT DO NOTHING;;
+INSERT INTO OperationsTypes(Description) VALUES ('WITHDRAWAL') ON CONFLICT DO NOTHING;;
+INSERT INTO OperationsTypes(Description) VALUES ('PAYMENT') ON CONFLICT DO NOTHING;;
