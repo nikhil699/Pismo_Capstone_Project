@@ -57,9 +57,11 @@ class AccountServiceTest {
 
         when(accountRepository.findById(1L)).thenReturn(Optional.of(account));
 
-        Optional<AccountResponse> responseOpt = accountService.getAccount(1L);
+        AccountResponse response = accountService.getAccount(1L);
 
-        assertThat(responseOpt).isPresent();
-        assertThat(responseOpt.get().getAccountId()).isEqualTo(1L);
+        assertThat(response).isNotNull();
+        assertThat(response.getAccountId()).isEqualTo(1L);
     }
+
+
 }
