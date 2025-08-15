@@ -8,9 +8,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import static Pismo.demo.constants.ApiStatusCodes.*;
 @RestController
 @RequestMapping("/transactions")
 @RequiredArgsConstructor
@@ -20,14 +21,14 @@ public class TransactionController {
 
     @Operation(summary = "Create a transaction", description = "Creates a new transaction linked to an account and operation type")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Transaction created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid request body"),
-            @ApiResponse(responseCode = "404", description = "Account or Operation type not found")
+            @ApiResponse(responseCode = CREATED, description = "Transaction created successfully"),
+            @ApiResponse(responseCode = BAD_REQUEST, description = "Invalid request body"),
+            @ApiResponse(responseCode = NOT_FOUND, description = "Account or Operation type not found")
     })
     @PostMapping
     public ResponseEntity<TransactionResponse> createTransaction(@Valid @RequestBody TransactionRequest request) {
         return transactionService.createTransaction(request)
-                .map(response -> ResponseEntity.status(201).body(response))
+                .map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
                 .orElse(ResponseEntity.notFound().build());
     }
 }

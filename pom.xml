@@ -83,6 +83,21 @@
 			<version>2.7.0</version>
 		</dependency>
 
+
+			<!-- Caching abstraction -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-cache</artifactId>
+			</dependency>
+
+			<!-- Redis (Lettuce driver by default) -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis</artifactId>
+			</dependency>
+
+
+
 	</dependencies>
 
 	<build>
