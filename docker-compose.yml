@@ -13,28 +13,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  redis:
-    image: redis:7
-    container_name: redis-cache
-    restart: always
-    ports:
-      - "6379:6379"
-
   app:
     build: .
     container_name: pismo-app
     restart: always
     depends_on:
       - postgres
-      - redis
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/pismo_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_SQL_INIT_MODE: always
-      SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PORT: 6379
     ports:
       - "8080:9090"
 

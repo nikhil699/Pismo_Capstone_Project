@@ -40,12 +40,8 @@ public class AccountController {
     })
     @GetMapping("/{accountId}")
     public ResponseEntity<AccountResponse> getAccount(@PathVariable Long accountId) {
-        AccountResponse account = accountService.getAccount(accountId);
-        if (account != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(account);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return accountService.getAccount(accountId)
+                .map(account -> ResponseEntity.status(HttpStatus.OK).body(account))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
-
 }
